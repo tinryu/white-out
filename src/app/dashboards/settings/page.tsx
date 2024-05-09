@@ -16,7 +16,7 @@ const Setting = () => {
     </div>
     <div className="border border-gray-300 rounded-md p-4 mt-4">
       <h5 className="font-semibold">Project Type</h5>
-        <Dropdown label="Dropdown button" dismissOnClick={false} renderTrigger={() => <div className="flex justify-between px-0 border border-transparent hover:border-gray-300 rounded-md p-2">
+        <Dropdown label="Dropdown button" dismissOnClick={true} renderTrigger={() => <div className="flex justify-between px-0 border border-transparent hover:border-gray-300 rounded-md p-2">
           Client Relationship
           <svg xmlns="http://www.w3.org/2000/svg" className="rotate-90" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.71 6.29a1 1 0 0 0-1.42 0l-5 5a1 1 0 0 0 0 1.42l5 5a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L5.41 12l4.3-4.29a1 1 0 0 0 0-1.42m11 5l-5-5a1 1 0 0 0-1.42 1.42l4.3 4.29l-4.3 4.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 0-1.42"/></svg></div>
         }>

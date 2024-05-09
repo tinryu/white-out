@@ -1,6 +1,5 @@
 "use client";
-import type { CustomFlowbiteTheme } from "flowbite-react";
-import { Progress, Toast } from "flowbite-react";
+import { Progress, Toast, CustomFlowbiteTheme } from "flowbite-react";
 import Image from "next/image";
 import { useState } from "react";
 import FileUpload from "../components/FileUpload";
