@@ -7,12 +7,9 @@ import {
   Title,
   Tooltip,
   Legend,
-  scales,
-  plugins,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { fa, faker } from '@faker-js/faker';
-import { title } from "process";
+import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,

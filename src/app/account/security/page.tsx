@@ -1,7 +1,53 @@
-import React from 'react'
-import Image from 'next/image'
+"use client"
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import { faker } from '@faker-js/faker';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const page = () => {
+  const options = {
+    reponsive: true,
+    scales: {
+        y: {
+            beginAtZero: true
+        }
+    },
+    plugins: {
+        legend: {
+            display: false,
+        }
+    },
+  }
+  const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const data = {
+      labels,
+      datasets: [{
+          label: '',
+          data: labels.map(() => faker.number.int({ min: 0, max: 120 })),
+          backgroundColor: 'rgba(168, 197,218, 1)',
+          barPercentage: .4,
+          borderRadius: 5
+        }
+      ]
+  }
+
   return (
     <>
     <div className="flex gap-5">
@@ -28,12 +74,12 @@ const page = () => {
             <p className="font-bold">291</p>
           </li>
         </ul>
-        <ul className="flex gap-4 mt-5 text-gray-400">
+        <ul className="flex gap-4 my-5 text-gray-400">
           <li className="active font-bold text-slate-950">Agens Chart</li>
           <li>Clients Chart</li>
         </ul>
         <div className="content-swap">
-          CHART
+          <Bar options={options} data={data} />
         </div>
       </div>
       <div className="basis-1/2">
@@ -41,7 +87,7 @@ const page = () => {
           <div className="flex justify-between">
             <h5 className="font-bold capitalize">Recent alert</h5>
             <div className="g-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><path fill="black" fill-rule="evenodd" d="M2 5h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1M0 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5m2.25.75a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0m3.75-.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5" clip-rule="evenodd"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><path fill="black" fillRule="evenodd" d="M2 5h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1M0 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5m2.25.75a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0m3.75-.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5" clipRule="evenodd"/></svg>
             </div>
           </div>
           <div className="my-8 text-xs text-gray-400">
@@ -56,7 +102,7 @@ const page = () => {
           <div className="flex justify-between">
             <h5 className="font-bold capitalize">Security Guidelines</h5>
             <div className="g-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><path fill="black" fill-rule="evenodd" d="M2 5h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1M0 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5m2.25.75a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0m3.75-.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5" clip-rule="evenodd"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><path fill="black" fillRule="evenodd" d="M2 5h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1M0 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5m2.25.75a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0m3.75-.75a.75.75 0 1 0 0 1.5a.75.75 0 0 0 0-1.5" clipRule="evenodd"/></svg>
             </div>
           </div>
           <div className="my-8 text-xs text-gray-400">
@@ -86,28 +132,28 @@ const page = () => {
             <td>USA(5)</td>
             <td>Chrome - Windows</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td className="text-violet-400">In progress</td>
           </tr>
           <tr className="*:py-2">
           <td>UK(10)</td>
             <td>Firefox - Windows</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td className="text-green-400">Complete</td>
           </tr>
           <tr className="*:py-2">
           <td>Italy(10)</td>
             <td>IOS - IPhone</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td className="text-yellow-400">Approved</td>
           </tr>
           <tr className="*:py-2">
           <td>VN(15)</td>
             <td>Safari - Mac OS</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td className="text-gray-400">Reject</td>
           </tr>
           
@@ -130,28 +176,28 @@ const page = () => {
           <tr className="*:py-2">
             <td>DSI: Workstation 2</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td>fftt456765gjkkjhi8306767</td>
             <td className="text-violet-400">In progress</td>
           </tr>
           <tr className="*:py-2">
             <td>DSI: Workstation 2</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td>fftt456765gjkkjhi8306767</td>
             <td className="text-green-400">Complete</td>
           </tr>
           <tr className="*:py-2">
             <td>DSI: Workstation 2</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td>fftt456765gjkkjhi8306767</td>
             <td className="text-yellow-400">Approved</td>
           </tr>
           <tr className="*:py-2">
             <td>DSI: Workstation 2</td>
             <td>236.125.56.78</td>
-            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-miterlimit="10" stroke-width="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
+            <td className="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeMiterlimit="10" strokeWidth="32" d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"/><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 128v144h96"/></svg> 2 minustes ago</td>
             <td>fftt456765gjkkjhi8306767</td>
             <td className="text-gray-400">Reject</td>
           </tr>
