@@ -7,7 +7,7 @@ function Header() {
   const segmentpast = useSelectedLayoutSegment()
   return (
     <>
-      <Breadcrumb aria-label="Default breadcrumb example" className="bg-white h-16 text-sm flex items-center px-6 border-b border-gray-200 dark:border-gray-700 mb-4">
+      <Breadcrumb aria-label="Default breadcrumb example" className="bg-white h-16 capitalize text-sm flex items-center px-6 border-b border-gray-200 dark:border-gray-700 mb-4">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         {segments.map((segment, index) => (
           <Breadcrumb.Item href={segment === segmentpast ? '/'+segmentpast : segment} key={index}>{segment}</Breadcrumb.Item>
