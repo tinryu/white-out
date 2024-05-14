@@ -1,3 +1,4 @@
+import ButtonClipboard from '@/app/components/ButtonClipboard'
 import React from 'react'
 
 const page = () => {
@@ -24,12 +25,10 @@ const page = () => {
         </li>
       </ul>
       
+
       <div className="border-gray-300 border-t-2 py-4 mt-4">
         <h6 className="font-bold text-sm">Your Referral Link</h6>
-        <span className="relative">
-          <input type="text" placeholder="https://keenthemes.com/reffer/?refid=345re66787k8" id="links" name="links" autoComplete="http://" className="rounded-md border-gray-300 w-2/3"/>
-          <svg className="absolute -top-1 right-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 21 21"><g fill="none" fillRule="evenodd" stroke="black" strokeLinecap="round" strokeLinejoin="round"><path d="M7.5 4.5h-2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-11a1 1 0 0 0-1-1h-2"/><path d="M8.5 3.5h4a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2m1 5h5m-5 3h5m-5 3h5m-8-6h1m-1 3h1m-1 3h1"/></g></svg>
-        </span>
+        <ButtonClipboard nameID="text" placeholder="https://abcExercise.com/reffer/?refid=3sasdsa6787k8" className="rounded-md border-gray-300 w-2/3" />
         <p className="text-xs mt-4 text-slate-400">Plan your blog post by choosing a topic, creating an outline conduct research, and checking facts.</p>
       </div>
       
