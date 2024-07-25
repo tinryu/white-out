@@ -1,4 +1,5 @@
 import ChartPanel from "./components/Chart/ChartPanel";
+
 export default function Home() {
   return (
     <main className="flex p-6">

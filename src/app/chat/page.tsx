@@ -4,8 +4,8 @@ import { Badge } from "flowbite-react";
 
 const Page = () => {
   return (
-    <div className="flex p-6">
-        <div className="basis-1/3">
+    <div className="flex p-6 gap-6">
+        <div className="basis-1/3 min-h-screen overflow-x-hidden">
             <div className="flex justify-between bg-slate-100 p-3 rounded-md mb-3">
                 <div className="flex gap-2">
                     <button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48"/><path fill="black" d="M459.94 53.25a16.06 16.06 0 0 0-23.22-.56L424.35 65a8 8 0 0 0 0 11.31l11.34 11.32a8 8 0 0 0 11.34 0l12.06-12c6.1-6.09 6.67-16.01.85-22.38M399.34 90L218.82 270.2a9 9 0 0 0-2.31 3.93L208.16 299a3.91 3.91 0 0 0 4.86 4.86l24.85-8.35a9 9 0 0 0 3.93-2.31L422 112.66a9 9 0 0 0 0-12.66l-9.95-10a9 9 0 0 0-12.71 0"/></svg></button>
@@ -58,7 +58,82 @@ const Page = () => {
                 </li>
             </ul>
         </div>
-        <div className="basis-2/3"></div>
+        <div className="basis-2/3 border border-gray-300 rounded-md">
+            <div className="heading border-b flex items-center p-4">
+                <div className="flex-none mr-3">
+                    <Image priority={true} src="/Ginger.svg" alt="pepper" width={26} height={26} className="flex-none bg-gray-500 rounded-full w-8 h-8 p-1"/>
+                </div>
+                <div className="flex-1 text-xs">
+                    <p className="font-semibold">Byeuww</p>
+                    <p className="text-gray-400">Emaigl.@gmail.com</p>
+                </div>
+                <div className="flex gap-2">
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M19.44 13c-.22 0-.45-.07-.67-.12a9.44 9.44 0 0 1-1.31-.39a2 2 0 0 0-2.48 1l-.22.45a12.18 12.18 0 0 1-2.66-2a12.18 12.18 0 0 1-2-2.66l.42-.28a2 2 0 0 0 1-2.48a10.33 10.33 0 0 1-.39-1.31c-.05-.22-.09-.45-.12-.68a3 3 0 0 0-3-2.49h-3a3 3 0 0 0-3 3.41a19 19 0 0 0 16.52 16.46h.38a3 3 0 0 0 2-.76a3 3 0 0 0 1-2.25v-3a3 3 0 0 0-2.47-2.9m.5 6a1 1 0 0 1-.34.75a1.05 1.05 0 0 1-.82.25A17 17 0 0 1 4.07 5.22a1.09 1.09 0 0 1 .25-.82a1 1 0 0 1 .75-.34h3a1 1 0 0 1 1 .79q.06.41.15.81a11.12 11.12 0 0 0 .46 1.55l-1.4.65a1 1 0 0 0-.49 1.33a14.49 14.49 0 0 0 7 7a1 1 0 0 0 .76 0a1 1 0 0 0 .57-.52l.62-1.4a13.69 13.69 0 0 0 1.58.46q.4.09.81.15a1 1 0 0 1 .79 1Z"/></svg></a>
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><g fill="black" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 4.5H5A2.5 2.5 0 0 0 2.5 7v5A2.5 2.5 0 0 0 5 14.5h6a2.5 2.5 0 0 0 2.5-2.5V7A2.5 2.5 0 0 0 11 4.5M3.5 7A1.5 1.5 0 0 1 5 5.5h6A1.5 1.5 0 0 1 12.5 7v5a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 12z"/><path d="M15.728 5.58L12.75 7.517a.5.5 0 0 0-.228.414l-.027 2.612a.5.5 0 0 0 .227.425l3.004 1.952a.5.5 0 0 0 .773-.419V6a.5.5 0 0 0-.773-.42m-.226 6l-2.001-1.301l.021-2.07l1.98-1.287z"/></g></svg></a>
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="rotate-90" width="24" height="24" viewBox="0 0 20 20"><path fill="black" d="M10 12a2 2 0 1 1 0-4a2 2 0 0 1 0 4m0-6a2 2 0 1 1 0-4a2 2 0 0 1 0 4m0 12a2 2 0 1 1 0-4a2 2 0 0 1 0 4"/></svg></a>
+                </div>
+            </div>
+            <div className="content p-6 bg-slate-50 min-h-screen relative">
+                <div className="contentbox max-h-screen overflow-x-hidden">
+                    <ul className="w-full flex-col">
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>hi ByeWind, I saw your work on Dribbble and it`s awesome.I would like to know more about it. Could you send me your website?</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Thank you. Of course. Just a moment, please.</p>
+                        </li>
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Got it, thank you.</p>
+                        </li>
+                        <li className="w-full clear-both py-5">
+                            <p className="text-center text-gray-300 text-sm">Thurday 10-05, 10:30</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>:v</p>
+                        </li>
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>hi ByeWind, I saw your work on Dribbble and it`s awesome.I would like to know more about it. Could you send me your website?</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Thank you. Of course. Just a moment, please.</p>
+                        </li>
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Got it, thank you.</p>
+                        </li>
+                        <li className="w-full clear-both py-5">
+                            <p className="text-center text-gray-300 text-sm">Friday, 10:30</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>:v</p>
+                        </li>
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>hi ByeWind, I saw your work on Dribbble and it`s awesome.I would like to know more about it. Could you send me your website?</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Thank you. Of course. Just a moment, please.</p>
+                        </li>
+                        <li className="float-left bg-slate-400 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>Got it, thank you.</p>
+                        </li>
+                        <li className="w-full clear-both py-5">
+                            <p className="text-center text-gray-300 text-sm">Today, 10:30</p>
+                        </li>
+                        <li className="float-right bg-violet-500 text-white border-white p-4 my-4 rounded-xl w-2/3 text-sm">
+                            <p>:v</p>
+                        </li>
+                    </ul>
+                </div>
+                <div className="chatbox bg-slate-100 flex gap-2 items-center px-3 py-2 rounded-xl absolute bottom-5 left-5 right-5">
+                    <div className="flex gap-3 flex-none">
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><g fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><rect width="6" height="11" x="9" y="3" rx="3"/><path d="M19 11a7 7 0 1 1-14 0m7 7v3"/></g></svg></a>
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20"><path fill="black" d="M19.09 2a.9.9 0 0 1 .91.889V17.11a.9.9 0 0 1-.91.889H.91A.9.9 0 0 1 0 17.11V2.89A.9.9 0 0 1 .91 2zM5.416 8.417l-4.06 4.042v4.217H18.64v-1.433l-3.2-3.12l-2.777 2.333c-.166.117-.326.168-.48.155a.792.792 0 0 1-.439-.189zm13.22-5.086H1.362v7.23L4.968 6.97a.718.718 0 0 1 .44-.156c.155 0 .291.047.41.14l6.431 6.088l2.805-2.35a.704.704 0 0 1 .421-.146a.69.69 0 0 1 .418.145l2.742 2.665zM15.273 5.23c.753 0 1.363.597 1.363 1.333s-.61 1.333-1.363 1.333c-.754 0-1.364-.597-1.364-1.333s.61-1.333 1.364-1.333"/></svg></a>
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20"><path fill="black" d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10S4.477 0 10 0m0 1.395a8.605 8.605 0 1 0 0 17.21a8.605 8.605 0 0 0 0-17.21M7.744 12a2.273 2.273 0 0 0 4.51.015a.682.682 0 1 1 1.353.172a3.637 3.637 0 0 1-7.217-.024A.682.682 0 1 1 7.744 12m-1.93-5.72a1.395 1.395 0 1 1 0 2.79a1.395 1.395 0 0 1 0-2.79m8.372 0a1.395 1.395 0 1 1 0 2.79a1.395 1.395 0 0 1 0-2.79"/></svg></a>
+                    </div>
+                    <input type="text" name="chatbox" id="chatbox" placeholder="Type message" className="flex-1 border-0 rounded-md" />
+                    <button className="ml-2" id="send" name="send"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="black" d="M1.177 1.119a.5.5 0 0 1 .547-.066l13 6.5a.5.5 0 0 1 0 .894l-13 6.5a.5.5 0 0 1-.702-.594L2.977 8L1.022 1.647a.5.5 0 0 1 .155-.528M3.869 8.5l-1.547 5.03L13.382 8L2.322 2.47L3.869 7.5H9.5a.5.5 0 0 1 0 1z"/></svg></button>
+                </div>
+            </div>
+        </div>
         
     </div>
   )
