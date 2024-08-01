@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence} from "framer-motion";
 import Link from "next/link";
-
-import { motion, AnimatePresence } from "framer-motion";
 
 export const SlideLeft = () => {
   const menuLists = [
@@ -175,6 +174,7 @@ export const SlideLeft = () => {
       ],
     },
   ];
+
   const [openMenuId, setOpenMenuId] = useState(null);
 
   const toggleSubMenu = (id :any) => {
@@ -183,7 +183,7 @@ export const SlideLeft = () => {
 
   return (
     <>
-      <aside className="w-64 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
+      <aside className="lg:w-64 md:w-48 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
         <div className="py-3">
           <a href="#" className="flex ms-2 md:me-24">
             <svg
@@ -236,17 +236,15 @@ export const SlideLeft = () => {
                       href={menu.src ? menu.src : ""}
                       className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                     >
-                      <span
-                        className={`${menu.lib} flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}
-                      ></span>
+                      <span className={`${menu.lib} ${openMenuId && openMenuId === i ? '' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
                       <span className="ms-3 capitalize">{menu.group}</span>
                     </Link>
                     <AnimatePresence>
                       {openMenuId === i && (
                         <motion.ul
-                        initial={{ height: 0, opacity: 0}}
-                        animate={{ height: 'auto', opacity: 1}}
-                        exit={{ height: 0, opacity: 0}}
+                        initial={{ height: 0, opacity: 0, filter: "blur(10px)"}}
+                        animate={{ height: 'auto', opacity: 1, filter: "blur(0px)"}}
+                        exit={{ height: 0, opacity: 0, filter: "blur(10px)"}}
                         transition={{ duration: 0.3 }}
                       >
                         {menu.child.map((item, index) => (

@@ -24,9 +24,9 @@ export default function RootLayout({
         <ThemeModeScript />
       </head>
       <body className={inter.className}>
-        <div className="flex flex-row min-h-screen bg-white dark:bg-gray-800 text-gray-800">
+        <div className="flex flex-row min-h-screen bg-white dark:bg-gray-800 text-gray-800 overflow-hidden">
           <SlideLeft/>
-          <div className="w-2/3">
+          <div className="lg:w-2/3 md:w-full">
             <Header/>
             {children}
           </div>
