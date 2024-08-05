@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence} from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useAnimate, stagger} from "framer-motion";
 import Link from "next/link";
+import { MenuToggle } from "./MenuToggle";
 
 export const SlideLeft = () => {
   const menuLists = [
@@ -181,104 +182,169 @@ export const SlideLeft = () => {
     setOpenMenuId((prevState) => (prevState === id ? null: id));
   };
 
+  // animate slide
+  function useMenuAnimation(isOpen: boolean) {
+    const [scope, animate] = useAnimate();
+    useEffect(() => {
+      const menuAnimations: any[] = isOpen
+        ? [
+            [
+              "aside",
+              { transform: "translateX(0%)", display: 'block'},
+              { ease: [0.08, 0.65, 0.53, 0.96], duration: 0.4 }
+            ],
+            [
+              "h3",
+              { opacity: 1, filter: "blur(0px)" },
+              { delay: stagger(0.01), at: "-0.1" }
+            ],
+            [
+              "li",
+              { transform: "scale(1)", opacity: 1, filter: "blur(0px)" },
+              { delay: stagger(0.02), at: "-0.1" }
+            ]
+          ]
+        : [
+            ["aside", { transform: "translateX(-100%)", display: 'none'}, { at: "-0.1" }],
+            [
+              "h3",
+              { opacity: 0, filter: "blur(10px)" },
+              { delay: stagger(0.01, { from: "last" }), at: "<" }
+            ],
+            [
+              "li",
+              { transform: "scale(0.5)", opacity: 0, filter: "blur(10px)" },
+              { delay: stagger(0.02, { from: "last" }), at: "<" }
+            ],
+          ];
+      if (window.innerWidth <= 1024) {
+        animate([
+          [
+            "path.top",
+            { d: isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5" },
+            { at: "<" }
+          ],
+          ["path.middle", { opacity: isOpen ? 0 : 1 }, { at: "<" }],
+          [
+            "path.bottom",
+            { d: isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346" },
+            { at: "<" }
+          ],
+          ...menuAnimations 
+        ]);
+      }   
+      
+    }, [isOpen, animate]);
+  
+    return scope;
+  }
+
+  const [isToggle, setToggle] = useState(false);
+  const scope = useMenuAnimation(isToggle);
+
   return (
     <>
-      <aside className="lg:w-64 md:w-48 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
-        <div className="py-3">
-          <a href="#" className="flex ms-2 md:me-24">
-            <svg
-              className="w-10 h-10 text-red-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M11.757 2.034a1 1 0 01.638.519c.483.967.844 1.554 1.207 2.03.368.482.756.876 1.348 1.467A6.985 6.985 0 0117 11a7.002 7.002 0 01-14 0c0-1.79.684-3.583 2.05-4.95a1 1 0 011.707.707c0 1.12.07 1.973.398 2.654.18.374.461.74.945 1.067.116-1.061.328-2.354.614-3.58.225-.966.505-1.93.839-2.734.167-.403.356-.785.57-1.116.208-.322.476-.649.822-.88a1 1 0 01.812-.134zm.364 13.087A2.998 2.998 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879.586.585.879 1.353.879 2.121s-.293 1.536-.879 2.121z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-              Brandname
-            </span>
-          </a>
-        </div>
-        <div className="px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          <nav className="space-y-2 font-medium">
-            <ul>
-            {menuLists.map((menu, i) => (
-              <li key={i} className="my-px">
-                {menu.child.length === 1 &&
-                  menu.child.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.src ? item.src : ""}
-                      className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                    >
-                      <span
-                        className={`${item.lib} flex items-center justify-center text-base  w-7 h-7 ${item.color}`}
-                      ></span>
-                      <span className="ms-3 capitalize">{item.name}</span>
-                      {item.badges !== "" ? (
-                        <span className="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
-                          {item.badges}
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </Link>
-                  ))
-                }
-                
-                {menu.child.length > 1 ?
-                  <>
-                    <Link
-                      onClick={() => toggleSubMenu(i)}
-                      href={menu.src ? menu.src : ""}
-                      className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                    >
-                      <span className={`${menu.lib} ${openMenuId && openMenuId === i ? '' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
-                      <span className="ms-3 capitalize">{menu.group}</span>
-                    </Link>
-                    <AnimatePresence>
-                      {openMenuId === i && (
-                        <motion.ul
-                        initial={{ height: 0, opacity: 0, filter: "blur(10px)"}}
-                        animate={{ height: 'auto', opacity: 1, filter: "blur(0px)"}}
-                        exit={{ height: 0, opacity: 0, filter: "blur(10px)"}}
-                        transition={{ duration: 0.3 }}
+      <div className="relative max-md:absolute top-0 left-0 h-screen" ref={scope}>
+         {/* toggle button */}
+        <button className="menuToggle absolute top-2 left-2 z-10 lg:hidden" onClick={() => setToggle(!isToggle)}>O</button>
+        {/* toggle div */}
+        <aside className="lg:w-64 md:w-48 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
+          <div className="py-3">
+            <a href="#" className="flex ms-2 md:me-24" onClick={() => setToggle(!isToggle)}>
+              <svg
+                className="w-10 h-10 text-red-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M11.757 2.034a1 1 0 01.638.519c.483.967.844 1.554 1.207 2.03.368.482.756.876 1.348 1.467A6.985 6.985 0 0117 11a7.002 7.002 0 01-14 0c0-1.79.684-3.583 2.05-4.95a1 1 0 011.707.707c0 1.12.07 1.973.398 2.654.18.374.461.74.945 1.067.116-1.061.328-2.354.614-3.58.225-.966.505-1.93.839-2.734.167-.403.356-.785.57-1.116.208-.322.476-.649.822-.88a1 1 0 01.812-.134zm.364 13.087A2.998 2.998 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879.586.585.879 1.353.879 2.121s-.293 1.536-.879 2.121z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                Brandname
+              </span>
+            </a>
+          </div>
+          <div className="px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+            <nav className="space-y-2 font-medium">
+              <ul>
+              {menuLists.map((menu, i) => (
+                <li key={i} className="my-px">
+                  {menu.child.length === 1 &&
+                    menu.child.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.src ? item.src : ""}
+                        className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
-                        {menu.child.map((item, index) => (
-                          <li className="my-px" key={index}>
-                            <Link
-                              href={item.src ? item.src : ""}
-                              className="flex items-center p-2 pl-5 font-normal text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                            >
-                              <span
-                                className={`${item.lib} flex items-center justify-center text-sm  w-6 h-6 ${item.color}`}
-                              ></span>
-                              <span className="ms-3 capitalize">{item.name}</span>
-                              {item.badges !== "" ? (
-                                <span className="flex items-center justify-center text-sm text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
-                                  {item.badges}
-                                </span>
-                              ) : ""}
-                            </Link>
-                          </li>
-                        ))}
-                      </motion.ul>
-                      )}
-                    </AnimatePresence>
-                  </> : ""
-                }
-              </li>
-            ))}
-            </ul>
-          </nav>
-        </div>
-        <p className="text-sm text-gray-600 text-center absolute bottom-0">
-          © Brandname 2024. All rights reserved. <a href="#">by Truong Tin</a>
-        </p>
-      </aside>
+                        <span
+                          className={`${item.lib} flex items-center justify-center text-base  w-7 h-7 ${item.color}`}
+                        ></span>
+                        <span className="ms-3 capitalize">{item.name}</span>
+                        {item.badges !== "" ? (
+                          <span className="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                            {item.badges}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </Link>
+                    ))
+                  }
+                  
+                  {menu.child.length > 1 ?
+                    <>
+                      <Link
+                        onClick={() => toggleSubMenu(i)}
+                        href={menu.src ? menu.src : ""}
+                        className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                      >
+                        <span className={`${menu.lib} ${openMenuId && openMenuId === i ? '' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
+                        <span className="ms-3 capitalize">{menu.group}</span>
+                      </Link>
+                      <AnimatePresence>
+                        {openMenuId === i && (
+                          <motion.ul
+                          initial={{ height: 0, opacity: 0, filter: "blur(10px)"}}
+                          animate={{ height: 'auto', opacity: 1, filter: "blur(0px)"}}
+                          exit={{ height: 0, opacity: 0, filter: "blur(10px)"}}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {menu.child.map((item, index) => (
+                            <li className="my-px" key={index}>
+                              <Link
+                                href={item.src ? item.src : ""}
+                                className="flex items-center p-2 pl-5 font-normal text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                              >
+                                <span
+                                  className={`${item.lib} flex items-center justify-center text-sm  w-6 h-6 ${item.color}`}
+                                ></span>
+                                <span className="ms-3 capitalize">{item.name}</span>
+                                {item.badges !== "" ? (
+                                  <span className="flex items-center justify-center text-sm text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                                    {item.badges}
+                                  </span>
+                                ) : ""}
+                              </Link>
+                            </li>
+                          ))}
+                        </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </> : ""
+                  }
+                </li>
+              ))}
+              </ul>
+            </nav>
+          </div>
+          <p className="text-sm text-gray-600 text-center absolute bottom-0">
+            © Brandname 2024. All rights reserved. <a href="#">by Truong Tin</a>
+          </p>
+        </aside>
+      </div>
     </>
   );
 };

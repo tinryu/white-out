@@ -66,11 +66,11 @@ export const SlideRight = () => {
   const scope = useMenuAnimation(isToggle);
 
   return (
-    <div className="relative md:absulute md:top-0 md:right-0 h-screen bg-white border-l border-gray-200 dark:bg-gray-800 dark:border-gray-700" ref={scope}>
+    <div className="relative max-md:absolute top-0 right-0 h-screen" ref={scope}>
       {/* toggle button */}
       <MenuToggle toggle={() => setToggle(!isToggle)}/>
       {/* toggle div */}
-      <aside className="w-64 md:hidden lg:block md:h-screen">
+      <aside className="w-64 max-sm:w-full md:hidden lg:block md:h-screen bg-white border-l border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-start p-4 mb-2">
           <h3 className="inline-flex">Notifications</h3>
         </div>
