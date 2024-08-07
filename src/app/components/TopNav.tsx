@@ -10,9 +10,9 @@ const TopNav: React.FC<{menu: Menu[]}> = ({menu}) => {
   let [menuList, setMenuList] = React.useState(menu);
   return (
     <div className="flex justify-between px-6 pb-10">
-      <ul className="flex flex-wrap">
+      <ul className="flex flex-wrap gap-x-4 justify-start">
         {menuList.map((item: any, i: number) => (
-          <li key={i} className="pr-6">
+          <li key={i} className="">
             <Link
               href={item.link}
               className={item.link === pathname ? "text-sm font-semibold text-slate-950 dark:bg-slate-700 dark:text-slate-50 border-b border-slate-500" : "text-sm text-gray-300 hover:bg-white hover:text-slate-950 dark:text-gray-400 dark:hover:bg-gray-800dark:hover:text-gray-300"}
@@ -22,9 +22,10 @@ const TopNav: React.FC<{menu: Menu[]}> = ({menu}) => {
           </li>
         ))}
       </ul>
-      <div className="group-button">
+      
+      {/* <div className="group-button">
         <button>...</button>
-      </div>
+      </div> */}
     </div>
   );
 };

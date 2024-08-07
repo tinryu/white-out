@@ -27,9 +27,9 @@ const Page = () => {
         <span className="font-semibold text-md capitalize">coffee detail page</span>
         <svg className="text-[40px] text-white bg-[#95A4FC] rounded-full p-2" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M256 32v448m57.72-400A111.47 111.47 0 0 1 256 96a111.47 111.47 0 0 1-57.72-16m0 352a112.11 112.11 0 0 1 115.44 0m136.27-288L62.01 368m375.26-150a112.09 112.09 0 0 1-57.71-100M74.73 294a112.09 112.09 0 0 1 57.71 100M62.01 144l387.98 224M74.73 218a112.09 112.09 0 0 0 57.71-100m304.83 176a112.09 112.09 0 0 0-57.71 100"/></svg>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap max-sm:*:border-0 max-sm:*:w-full max-sm:*:px-0">
         <div className="border-r-2 px-6">
-          <div className="w-40">
+          <div className="w-40 max-sm:w-full">
             <Progress theme={customTheme} progress={50} progressLabelPosition="inside" textLabel="Status" textLabelPosition="outside" color="purple" size="xl" labelProgress labelText/>
           </div>
         </div>
@@ -49,16 +49,16 @@ const Page = () => {
         </div>
       </div>
     </div>
-    <div className="mt-6 grid grid-cols-2 gap-6">
+    <div className="mt-6 grid grid-cols-2 gap-6 max-sm:grid-cols-1">
       <div className="bg-slate-50 rounded-2xl p-6">
         <h4>What`s on the road?</h4>
-        <div className="flex space-x-6 mt-4 *:bg-slate-50 *:p-2 *:rounded-xl *:text-slate-950">
+        <div className="flex flex-wrap space-x-6 mt-4 *:bg-slate-50 *:p-2 *:rounded-xl *:text-slate-950 max-sm:space-x-0 max-sm:*:p-1 max-sm:justify-between">
           {sevenDays.map((i: any, key: any) => (
             <button className={i.active === 1 ? "!bg-slate-950 !text-slate-50 *:block" : "*:block"} key={key}><span>{i.day}</span><span>{i.date}</span></button> 
           ))}
         </div>
 
-        <ul className="flex flex-col w-full mt-6 -mx-3">
+        <ul className="flex flex-col w-full mt-6 gap-x-3">
           <li className="mb-4">
             <a href="#" className="flex flex-row items-center h-10 px-3">
               <span className="bg-gray-500 rounded-full relative after:w-5 after:h-[1px] after:bg-[#e8e8e8] after:rotate-90 after:content-[' '] after:block after:absolute after:-bottom-4 after:left-1">

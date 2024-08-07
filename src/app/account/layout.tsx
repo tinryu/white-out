@@ -11,11 +11,11 @@ const menu = [
   {title: 'Logs', link: '/account/logs'}
 ];
 
-export default function DashboardLayout({children}: {children: React.ReactNode;}) {
+export default function AccountLayout({children}: {children: React.ReactNode;}) {
   return (
     <>
       <TopNav menu={menu}/>
-      <main className="w-full min-h-screen p-6">{children}</main>
+      {children}
     </>
     );
 }

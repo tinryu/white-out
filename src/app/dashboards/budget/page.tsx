@@ -16,7 +16,7 @@ const Budget = () => {
       </div>
       <div className="mt-10">
         <h5 className="font-semibold text-xl mb-6">Usage Charater</h5>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 max-sm:grid-cols-1">
           <div className="relative p-4 border-2 rounded-xl hover:border-black hover:cursor-pointer">
             <label htmlFor="precise" className="font-semibold relative mb-[12px] w-full block">
               <input type="radio" id="precise" name="price" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/precise"/>
@@ -85,7 +85,7 @@ const Budget = () => {
           </label>
         </div>
       </div>
-      <div className="mt-10 border-1 border-t -mx-6 px-6">
+      <div className="mt-10 border-1 border-t -mx-4 px-6">
         <div className="flex justify-end">
           <button className="p-2 my-3 mr-3 bg-slate-100 rounded-md hover:bg-slate-950 hover:text-slate-100 font-semibold">Cancel</button>
           <button className="p-2 my-3 bg-slate-100 rounded-md hover:bg-slate-950 hover:text-slate-100 font-semibold">Save Changes</button>

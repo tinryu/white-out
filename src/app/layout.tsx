@@ -26,9 +26,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex flex-row min-h-screen bg-white dark:bg-gray-800 text-gray-800">
           <SlideLeft/>
-          <div className="lg:w-2/3 max-md:w-full md:w-full">
+          <div className="flex-1 min-h-full lg:w-2/3 md:w-full max-sm:w-[100%] max-sm:pl-[70px]">
             <Header/>
-            {children}
+            <main className="w-full max-h-[85vh] overflow-auto p-4">{children}</main>
           </div>
           <SlideRight/>
         </div>

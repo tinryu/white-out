@@ -49,7 +49,7 @@ const Page = () => {
     };
   return (
     <div className="rounded-xl w-full">
-        <form id="signup" className="w-1/2 m-auto bg-slate-50 p-6 text-center rounded-2xl">
+        <form id="signup" className="w-1/2 max-sm:w-full m-auto bg-slate-50 p-6 text-center rounded-2xl">
             <h5 className="font-bold text-xl">Sign Up</h5>
             <p className="text-gray-400 text-md pt-3 pb-8">Your social Campaigns</p>
 

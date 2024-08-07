@@ -162,7 +162,7 @@ const Users = () => {
   const [data, setData] = React.useState(() => defaultData)
 
   return (
-    <div className="p-2">
+    <div className="p-2 overflow-auto">
       <MyTable {...{
           data,
           columns,
@@ -232,7 +232,7 @@ function MyTable({
         </tbody>
       </table>
 
-      <div className="flex items-center w-full justify-end mt-4">
+      <div className="flex items-center w-full justify-end mt-4 max-sm:justify-center">
         <button
           className="border rounded px-4 py-2 text-sm font-semibold hover:bg-slate-800 hover:text-gray-50 dark:hover:bg-gray-50 dark:hover:text-slate-800"
           onClick={() => table.setPageIndex(1)}

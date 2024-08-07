@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useAnimate, stagger} from "framer-motion";
+import { motion, AnimatePresence, useAnimate} from "framer-motion";
 import Link from "next/link";
-import { MenuToggle } from "./MenuToggle";
 
 export const SlideLeft = () => {
   const menuLists = [
@@ -177,82 +176,64 @@ export const SlideLeft = () => {
   ];
 
   const [openMenuId, setOpenMenuId] = useState(null);
+  const [isToggleLeft, setToggleLeft] = useState(false);
+  const [isSubToggle, setSubToggle] = useState(true);
 
   const toggleSubMenu = (id :any) => {
-    setOpenMenuId((prevState) => (prevState === id ? null: id));
+      if (window.innerWidth <= 680) {
+        if(isToggleLeft) {
+          setOpenMenuId((prevState) => (prevState === id ? null: id));
+          setSubToggle(!isSubToggle)        
+        }
+      } else {
+        setOpenMenuId((prevState) => (prevState === id ? null: id));
+        setSubToggle(!isSubToggle)
+      }
   };
+  const ToggleButton = () => {
+    setToggleLeft(!isToggleLeft);
+    setSubToggle(!isSubToggle);
+  };
+  const scope = useMenuAnimation(isToggleLeft);
 
   // animate slide
-  function useMenuAnimation(isOpen: boolean) {
+  function useMenuAnimation(isToggleLeft: boolean) {
     const [scope, animate] = useAnimate();
     useEffect(() => {
-      const menuAnimations: any[] = isOpen
+      const menuAnimations: any[] = isToggleLeft
         ? [
-            [
-              "aside",
-              { transform: "translateX(0%)", display: 'block'},
+            [ 
+              "span.txt_menu", 
+              { transform: "scale(1)", opacity: 1, filter: "blur(0px)", display: "block" },
               { ease: [0.08, 0.65, 0.53, 0.96], duration: 0.4 }
-            ],
-            [
-              "h3",
-              { opacity: 1, filter: "blur(0px)" },
-              { delay: stagger(0.01), at: "-0.1" }
-            ],
-            [
-              "li",
-              { transform: "scale(1)", opacity: 1, filter: "blur(0px)" },
-              { delay: stagger(0.02), at: "-0.1" }
             ]
           ]
         : [
-            ["aside", { transform: "translateX(-100%)", display: 'none'}, { at: "-0.1" }],
-            [
-              "h3",
-              { opacity: 0, filter: "blur(10px)" },
-              { delay: stagger(0.01, { from: "last" }), at: "<" }
-            ],
-            [
-              "li",
-              { transform: "scale(0.5)", opacity: 0, filter: "blur(10px)" },
-              { delay: stagger(0.02, { from: "last" }), at: "<" }
-            ],
+            [ 
+              "span.txt_menu", 
+              { transform: "scale(0.5)", opacity: 0, filter: "blur(10px)", display: "none" },
+            ]
           ];
-      if (window.innerWidth <= 1024) {
+
+      if (window.innerWidth <= 680) {
         animate([
-          [
-            "path.top",
-            { d: isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5" },
-            { at: "<" }
-          ],
-          ["path.middle", { opacity: isOpen ? 0 : 1 }, { at: "<" }],
-          [
-            "path.bottom",
-            { d: isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346" },
-            { at: "<" }
-          ],
-          ...menuAnimations 
+          ...menuAnimations,
         ]);
       }   
       
-    }, [isOpen, animate]);
+    }, [animate, isToggleLeft]);
   
     return scope;
   }
 
-  const [isToggle, setToggle] = useState(false);
-  const scope = useMenuAnimation(isToggle);
-
   return (
     <>
-      <div className="relative max-md:absolute top-0 left-0 h-screen" ref={scope}>
-         {/* toggle button */}
-        <button className="menuToggle absolute top-2 left-2 z-10 lg:hidden" onClick={() => setToggle(!isToggle)}>O</button>
-        {/* toggle div */}
-        <aside className="lg:w-64 md:w-48 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
-          <div className="py-3">
-            <a href="#" className="flex ms-2 md:me-24" onClick={() => setToggle(!isToggle)}>
+      <div className="relative max-sm:absolute top-0 left-0 z-10 min-h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700" ref={scope}>
+        <aside className="left_slide lg:w-64 md:w-48 relative">
+          <div className="py-3 flex items-center max-sm:justify-start relative ml-[15px]">
+            <Link href="" className="flex">
               <svg
-                className="w-10 h-10 text-red-400"
+                className="w-10 h-10 text-red-400 logo"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -262,12 +243,15 @@ export const SlideLeft = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+              <span className="max-sm:hidden txt_menu self-center text-xl font-semibold max-sm:text-base whitespace-nowrap dark:text-white">
                 Brandname
               </span>
-            </a>
+              <button className="absolute md:hidden max-sm:block top-14 -right-12 bg-slate-200 rounded-r-xl" onClick={ToggleButton}>
+                <span className={`${isToggleLeft ? 'rotate-180' : 'rotate-0'} ease-linear duration-500 i-mdi-chevron-right-circle text-4xl text-black flex items-center my-1 mr-2 ml-1`}></span>
+              </button>
+            </Link>
           </div>
-          <div className="px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+          <div className="px-3 pb-4 overflow-y-auto max-h-[80vh] bg-white dark:bg-gray-800">
             <nav className="space-y-2 font-medium">
               <ul>
               {menuLists.map((menu, i) => (
@@ -277,14 +261,14 @@ export const SlideLeft = () => {
                       <Link
                         key={index}
                         href={item.src ? item.src : ""}
-                        className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        className="flex items-center max-sm:justify-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
                         <span
-                          className={`${item.lib} flex items-center justify-center text-base  w-7 h-7 ${item.color}`}
+                          className={`${item.lib} flex items-center max-sm:justify-center text-base  w-7 h-7 ${item.color}`}
                         ></span>
-                        <span className="ms-3 capitalize">{item.name}</span>
+                        <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{item.name}</span>
                         {item.badges !== "" ? (
-                          <span className="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                          <span className="flex items-center max-sm:justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
                             {item.badges}
                           </span>
                         ) : (
@@ -299,10 +283,10 @@ export const SlideLeft = () => {
                       <Link
                         onClick={() => toggleSubMenu(i)}
                         href={menu.src ? menu.src : ""}
-                        className="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        className="flex items-center max-sm:justify-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
-                        <span className={`${menu.lib} ${openMenuId && openMenuId === i ? '' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
-                        <span className="ms-3 capitalize">{menu.group}</span>
+                        <span className={`${menu.lib} ${(isSubToggle && (openMenuId && openMenuId === i)) ? 'rotate-0' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
+                        <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{menu.group}</span>
                       </Link>
                       <AnimatePresence>
                         {openMenuId === i && (
@@ -311,19 +295,23 @@ export const SlideLeft = () => {
                           animate={{ height: 'auto', opacity: 1, filter: "blur(0px)"}}
                           exit={{ height: 0, opacity: 0, filter: "blur(10px)"}}
                           transition={{ duration: 0.3 }}
+                          className="md:pl-5"
                         >
                           {menu.child.map((item, index) => (
                             <li className="my-px" key={index}>
                               <Link
                                 href={item.src ? item.src : ""}
-                                className="flex items-center p-2 pl-5 font-normal text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                                className="flex items-center max-sm:justify-center p-2 font-normal text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                               >
                                 <span
-                                  className={`${item.lib} flex items-center justify-center text-sm  w-6 h-6 ${item.color}`}
+                                  className={`${item.lib} flex items-center max-sm:justify-center text-sm  w-6 h-6 ${item.color}`}
                                 ></span>
-                                <span className="ms-3 capitalize">{item.name}</span>
+                                <span
+                                  className="ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
+                                  {item.name}
+                                </span>
                                 {item.badges !== "" ? (
-                                  <span className="flex items-center justify-center text-sm text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                                  <span className="flex items-center max-sm:justify-center text-sm text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
                                     {item.badges}
                                   </span>
                                 ) : ""}
@@ -340,10 +328,14 @@ export const SlideLeft = () => {
               </ul>
             </nav>
           </div>
-          <p className="text-sm text-gray-600 text-center absolute bottom-0">
-            © Brandname 2024. All rights reserved. <a href="#">by Truong Tin</a>
-          </p>
+          
         </aside>
+        <p className="text-xs text-gray-600 text-center absolute bottom-0 left-4">
+          <Link href={{ pathname: '/contact', query: { slug: 'by-tin-truong' }, }} className="max-sm:block hidden text-[10px]">
+            <span className="i-mdi-alpha-i-circle text-3xl text-green-400"></span>
+          </Link>
+          <span className="max-sm:hidden">© Brandname 2024. All rights reserved. <a href="#">by Tin Truong</a></span>  
+        </p>
       </div>
     </>
   );

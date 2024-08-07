@@ -3,7 +3,7 @@ import Image from "next/image";
 const Targets = () => {
   return (
     <>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3 max-sm:grid-cols-1">
         <div className="start">
           <div className="title">
             <h3 className="font-semibold">

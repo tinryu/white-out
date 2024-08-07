@@ -50,7 +50,7 @@ const Page = () => {
 
     return (
     <div className="rounded-xl w-full">
-        <form id="createpass" className="w-1/2 m-auto bg-slate-50 p-6 text-center rounded-2xl">
+        <form id="createpass" className="w-1/2 max-sm:w-full m-auto bg-slate-50 p-6 text-center rounded-2xl">
             <h5 className="font-bold text-xl">Setup New Password</h5>
             <p className="text-gray-400 text-sm pt-3 pb-10">Have you already reset the password ? <a href="#" className="text-violet-300">Sign in</a></p>
 

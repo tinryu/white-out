@@ -50,8 +50,8 @@ const page = () => {
 
   return (
     <>
-    <div className="flex gap-5">
-      <div className="basis-1/2 bg-slate-50 p-6 rounded-2xl">
+    <div className="flex gap-5 max-sm:flex-col">
+      <div className="basis-1/2 md:basis-full max-sm:basis-full bg-slate-50 p-6 rounded-2xl">
         <div className="flex justify-between text-gray-400">
           <h5 className="font-bold capitalize text-slate-950">Top Selling categories</h5>
           <ul className="flex gap-2">
@@ -82,7 +82,7 @@ const page = () => {
           <Bar options={options} data={data} />
         </div>
       </div>
-      <div className="basis-1/2">
+      <div className="basis-1/2 md:basis-full max-sm:basis-full">
         <div className="bg-slate-50 p-6 rounded-2xl">
           <div className="flex justify-between">
             <h5 className="font-bold capitalize">Recent alert</h5>
@@ -115,7 +115,7 @@ const page = () => {
         </div>
       </div>
     </div>
-    <div className="bg-slate-50 rounded-2xl p-6 mt-6">
+    <div className="bg-slate-50 rounded-2xl p-6 mt-6 overflow-auto">
       <h4 className="font-semibold text-md">Login Sessions</h4>
       <table className="table-auto w-full text-sm">
         <thead>
@@ -160,7 +160,7 @@ const page = () => {
         </tbody>
       </table>
     </div>
-    <div className="bg-slate-50 rounded-2xl p-6 mt-6">
+    <div className="bg-slate-50 rounded-2xl p-6 mt-6 overflow-auto">
       <h4 className="font-semibold text-md">License Usage</h4>
       <table className="table-auto w-full text-sm">
         <thead>

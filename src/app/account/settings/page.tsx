@@ -6,7 +6,7 @@ const page = () => {
     <div className="bg-slate-50 rounded-2xl p-6">
         <h6>Profile Details</h6>
         <form action="" method="post" className="flex flex-col">
-            <div className="grid grid-cols-1 gap-x-6 gap-y-8 *:w-2/3">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 *:w-2/3 max-sm:*:w-full">
                 <div className="grid grid-cols-2 gap-x-8">
                     <input type="text" placeholder='First Name' name="firstname" id="firstname" className="rounded-lg border-gray-300 p-4" />
                     <input type="text" placeholder='Last Name' name="lastname" id="lastname" className="rounded-lg border-gray-300 p-4"/>
@@ -26,7 +26,7 @@ const page = () => {
     </div>
     <div className="bg-slate-50 rounded-2xl mt-6 p-6">
         <h6>Sign-in Method</h6>
-        <div className="form-sighin flex flex-wrap *:w-2/3">
+        <div className="form-sighin flex flex-wrap *:w-2/3 max-sm:*:w-full">
             <div className="g-email relative *:text-sm *:w-full">
                 <label htmlFor="email" className="absolute top-2 left-4 text-gray-3400" >Email Address</label>
                 <input type="text" placeholder="befood@gmail.com" autoComplete="befood@gmail.com" id="email" name="email" className="rounded-lg border-gray-300 pt-8 pb-4 px-4 placeholder:text-gray-300"/>
@@ -37,15 +37,15 @@ const page = () => {
             </div>
             
 
-            <div className="note bg-slate-200 rounded-2xl p-6 flex justify-between items-start !w-full mt-6">
+            <div className="note bg-slate-200 rounded-2xl p-6 flex justify-between items-start !w-full mt-6 max-sm:flex-col max-sm:items-center max-sm:text-center">
                 <div className="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256"><path fill="currentColor" d="M208 40H48a16 16 0 0 0-16 16v56c0 52.72 25.52 84.67 46.93 102.19c23.06 18.86 46 25.26 47 25.53a8 8 0 0 0 4.2 0c1-.27 23.91-6.67 47-25.53C198.48 196.67 224 164.72 224 112V56a16 16 0 0 0-16-16m0 72c0 37.07-13.66 67.16-40.6 89.42a129.3 129.3 0 0 1-39.4 22.2a128.25 128.25 0 0 1-38.92-21.81C61.82 179.51 48 149.3 48 112V56h160ZM82.34 141.66a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 11.32l-56 56a8 8 0 0 1-11.32 0Z"/></svg>
                 </div>
-                <div className="content text-sm pr-24">
+                <div className="content text-sm pr-24 max-sm:pr-2 ">
                     <h6 className="font-semibold">Secure Your Account</h6>
                     <p className="text-gray-400">Two-factor authentication adds an extra layer of security to your account. To log in, in addition you`l need to provide a 6 digit code.</p>
                 </div>
-                <button className="bg-gray-300 px-3 py-1 rounded-md">Enable</button>
+                <button className="bg-gray-300 px-3 py-1 rounded-md w-full">Enable</button>
             </div>
         </div>
     </div>
@@ -167,7 +167,7 @@ const page = () => {
         </ul>
     </div>
     <div className="bg-slate-50 rounded-2xl mt-6 p-6">
-        <div className="flex justify-between">
+        <div className="flex justify-between max-sm:flex-col max-sm:items-center">
             <h5 className="font-bold capitalize">Notifications</h5>
             <div className="g-button flex gap-3 *:text-sm *:font-normal">
                 <button className="bg-slate-100 rounded-md py-1 px-2">Cancel</button>
@@ -175,85 +175,85 @@ const page = () => {
             </div>
         </div>
         <ul className="*:border-b *:p-6">
-            <li className="flex justify-between last:border-none">
+            <li className="flex justify-between last:border-none max-sm:flex-col">
                 <p className="capitalize">
                     Notification
                 </p>
-                <div className="flex">
-                    <label htmlFor="email-no" className="relative right-10">
+                <div className="flex max-sm:justify-between">
+                    <label htmlFor="email-no" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="email-no" name="email-no" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Email</p>
                     </label>
-                    <label htmlFor="phone-no" className="relative right-0">
+                    <label htmlFor="phone-no" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="phone-no" name="phone-no" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Phone</p>
                     </label>
                 </div>
             </li>
-            <li className="flex justify-between last:border-none">
+            <li className="flex justify-between last:border-none max-sm:flex-col">
                 <p className="capitalize">
                     Billing Updates
                 </p>
-                <div className="flex">
-                    <label htmlFor="email-bill" className="relative right-10">
+                <div className="flex max-sm:justify-between">
+                    <label htmlFor="email-bill" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="email-bill" name="email-bill;" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Email</p>
                     </label>
-                    <label htmlFor="phone-bill" className="relative right-0">
+                    <label htmlFor="phone-bill" className="relative right-0 max-sm:right-0">
                         <input type="checkbox" id="phone-bill" name="phone-bill" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Phone</p>
                     </label>
                 </div>
             </li>
-            <li className="flex justify-between last:border-none">
+            <li className="flex justify-between last:border-none max-sm:flex-col">
                 <p className="capitalize">
                     New Team Members
                 </p>
-                <div className="flex">
-                    <label htmlFor="email-mem" className="relative right-10">
+                <div className="flex max-sm:justify-between">
+                    <label htmlFor="email-mem" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="email-mem" name="email-mem" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Email</p>
                     </label>
-                    <label htmlFor="phone-mem" className="relative right-0">
+                    <label htmlFor="phone-mem" className="relative right-0 max-sm:right-0">
                         <input type="checkbox" id="phone-mem" name="phone-mem" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Phone</p>
                     </label>
                 </div>
             </li>
-            <li className="flex justify-between last:border-none">
+            <li className="flex justify-between last:border-none max-sm:flex-col">
                 <p className="capitalize">
                     Completed Projects
                 </p>
-                <div className="flex">
-                    <label htmlFor="email-pro" className="relative right-10">
+                <div className="flex max-sm:justify-between">
+                    <label htmlFor="email-pro" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="email-pro" name="email-pro" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Email</p>
                     </label>
-                    <label htmlFor="phone-pro" className="relative right-0">
+                    <label htmlFor="phone-pro" className="relative right-0 max-sm:right-0">
                         <input type="checkbox" id="phone-pro" name="phone-pro" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Phone</p>
                     </label>
                 </div>
             </li>
-            <li className="flex justify-between last:border-none">
+            <li className="flex justify-between last:border-none max-sm:flex-col">
                 <p className="capitalize">
                     NewsLetters
                 </p>
-                <div className="flex">
-                    <label htmlFor="email-news" className="relative right-10">
+                <div className="flex max-sm:justify-between">
+                    <label htmlFor="email-news" className="relative right-10 max-sm:right-0">
                         <input type="checkbox" id="email-news" name="email-news" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Email</p>
                     </label>
-                    <label htmlFor="phone-news" className="relative right-0">
+                    <label htmlFor="phone-news" className="relative right-0 max-sm:right-0">
                         <input type="checkbox" id="phone-news" name="phone-news" className="absolute opacity-0 cursor-pointer h-0 w-0 peer/checknoti"/>
                         <span className="checkmark absolute top-0 left-0 h-[25px] w-[25px] bg-transparent border-2 border-gray-300 rounded-md after:content-[''] after:absolute after:hidden after:top-[5px] after:left-[9px] after:w-[5px] after:h-[10px] after:border-r-[2px] after:border-b-[2px] after:rotate-45 peer-checked/checknoti:bg-slate-950 peer-checked/checknoti:border-slate-50 after:border-slate-50 after:peer-checked/checknoti:block"></span>
                         <p className="pl-10">Phone</p>
@@ -270,10 +270,10 @@ const page = () => {
         <div className="bg-slate-100 rounded-2xl mt-6 p-6 flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024"><path fill="black" d="M512 64a448 448 0 1 1 0 896a448 448 0 0 1 0-896m0 832a384 384 0 0 0 0-768a384 384 0 0 0 0 768m48-176a48 48 0 1 1-96 0a48 48 0 0 1 96 0m-48-464a32 32 0 0 1 32 32v288a32 32 0 0 1-64 0V288a32 32 0 0 1 32-32"/></svg>
             <p className="pl-2 text-sm text-slate-950 flex-col">
-                <p className="">You Are Deactivating Your Account</p>
-                <p className="text-xs text-slate-500">
+                <span className="">You Are Deactivating Your Account</span>
+                <span className="text-xs text-slate-500">
                     For extra security, this requires you to confirm your email or phone number when you reset yousignr password. 
-                    <a href="#" className="text-violet-400">Learn more</a></p>
+                    <a href="#" className="text-violet-400">Learn more</a></span>
             </p>
         </div>
         <div className="flex pl-6">

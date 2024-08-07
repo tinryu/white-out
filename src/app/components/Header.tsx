@@ -6,7 +6,7 @@ function Header() {
   const segments = useSelectedLayoutSegments();
   const segmentpast = useSelectedLayoutSegment()
   return (
-    <div className="flex justify-between h-16 px-6 mb-4 border-b border-gray-200 dark:border-gray-700 ">
+    <div className="flex justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700 ">
       <Breadcrumb aria-label="Default breadcrumb example" className="bg-white capitalize text-sm flex items-center">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         {segments.map((segment, index) => (

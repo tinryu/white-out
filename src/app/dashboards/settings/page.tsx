@@ -59,7 +59,7 @@ const Setting = () => {
         <span className="text-gray-300">Active</span>
       </div>
     </div>
-    <div className="mt-10 border-1 border-t -mx-6 px-6">
+    <div className="mt-10 border-1 border-t -mx-4 px-6">
       <div className="flex justify-end">
         <button className="p-2 my-3 mr-3 bg-slate-100 rounded-md hover:bg-slate-950 hover:text-slate-100 font-semibold">Cancel</button>
         <button className="p-2 my-3 bg-slate-100 rounded-md hover:bg-slate-950 hover:text-slate-100 font-semibold">Save Changes</button>
