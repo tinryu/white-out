@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className="bg-slate-50 m-auto w-full text-center">
+    <div className="bg-slate-50 m-auto w-full text-center p-6">
       <form id="accountinfo" className="w-1/2 max-sm:w-full mx-auto">
         <h5 className="text-center font-bold text-2xl py-3">Account info</h5>
         <p className="text-center text-gray-400 text-sm pb-6">if you need more info, please check out <a href="#" className="text-violet-300">Help Page</a>.</p>
