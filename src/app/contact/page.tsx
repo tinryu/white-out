@@ -1,9 +1,10 @@
 "use client"
+import Scheduler from "../components/Scheduler"
 
 const Page = () => {
   return (
     <div>
-        scheduler
+        <Scheduler/>
     </div>
   )
 }

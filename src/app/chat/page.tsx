@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Image from 'next/image'
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "flowbite-react";
@@ -93,13 +93,13 @@ const Chat = () => {
             ]
         }
     ]
-    const [openId, setOpenId] = useState(null);
+    const [openId, setOpenId] = useState(0);
     const openSMS = (id: any) => {
         setOpenId((prevState) => (prevState === id ? null: id));
     }
     return (
         <div className="flex gap-6 max-sm:gap-2">
-            <div className="basis-1/3 max-sm:basis-20 overflow-hidden">
+            <div className="basis-1/3 max-sm:basis-20 max-sm:shadow-md max-sm:rounded-md overflow-hidden">
                 <div className="flex max-sm:hidden justify-between bg-slate-100 p-3 rounded-md mb-3">
                     <div className="flex gap-2">
                         <button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48"/><path fill="black" d="M459.94 53.25a16.06 16.06 0 0 0-23.22-.56L424.35 65a8 8 0 0 0 0 11.31l11.34 11.32a8 8 0 0 0 11.34 0l12.06-12c6.1-6.09 6.67-16.01.85-22.38M399.34 90L218.82 270.2a9 9 0 0 0-2.31 3.93L208.16 299a3.91 3.91 0 0 0 4.86 4.86l24.85-8.35a9 9 0 0 0 3.93-2.31L422 112.66a9 9 0 0 0 0-12.66l-9.95-10a9 9 0 0 0-12.71 0"/></svg></button>
@@ -125,9 +125,10 @@ const Chat = () => {
             </div>
             <AnimatePresence>
             {conversation.map((item, i) => (
-                <>
+                <Fragment key={i}>
                 {openId === item.userid && (
                     <motion.div
+                        key={item.name}
                         initial={{ opacity: 0, filter: "blur(10px)"}}
                         animate={{ opacity: 1, filter: "blur(0px)"}}
                         exit={{ opacity: 0, filter: "blur(10px)"}}
@@ -170,7 +171,7 @@ const Chat = () => {
                         </div>
                     </motion.div>
                 )}
-                </>
+                </Fragment>
             ))}
             </AnimatePresence>
         </div>
