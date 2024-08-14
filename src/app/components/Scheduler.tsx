@@ -10,23 +10,33 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
+type inputEvents = {
+  title : string,
+  start: Date,
+  end: Date,
+  desc?: string
+}
+
 const Scheduler: React.FC = () => {
   const [showModalSelect, setShowModalSelect] = useState<boolean>(false);
   const [showModalSelectSlot, setShowModalSelectSlot] = useState<boolean>(false);
 
-  const [eventsData, setEventsData] = useState<typeof events>(events);
-  const [selectEvents, setSelectEvents] = useState({ start: "", end: "", title: "", desc: "" });
+  const [eventsData, setEventsData] = useState<inputEvents[]>(events);
+  const [selectEvents, setSelectEvents] = useState<inputEvents>({ start: new Date, end: new Date, title: "", desc: "" });
    
-
   const handleSelectSlot = useCallback(
-    ({ start, end }: any) => {
-      const title = window.prompt('New Event name')
-      if (title) {
-        setEventsData((prev) => [...prev, { start, end, title }])
-      }
-    },
-    [setEventsData]
+    () => {
+      setEventsData((prev) => [...prev, selectEvents])
+      setShowModalSelectSlot(false)
+    },[selectEvents]
   )
+  const getDateTimeNow = (
+    ({ start, end }: any) => {
+      setShowModalSelectSlot(true)
+      setSelectEvents({ ...selectEvents, start, end})
+    }
+  )
+ 
   const handleSelectEvent = useCallback(
     (event: any) => {
       setShowModalSelect(true);
@@ -47,8 +57,7 @@ const Scheduler: React.FC = () => {
         events={eventsData}
         style={{ height: "100vh" }}
         onSelectEvent={handleSelectEvent}
-        // onSelectSlot={() => {setShowModalSelectSlot(true)}}
-        onSelectSlot={handleSelectSlot}
+        onSelectSlot={getDateTimeNow}
       />
     </div>
     <Dialog open={showModalSelect} onClose={setShowModalSelect} className="relative z-10">
@@ -60,7 +69,7 @@ const Scheduler: React.FC = () => {
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <DialogPanel
             transition
-            className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+            className="max-sm:absolute max-sm:top-1/2 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
           >
             <button
               type="button"
@@ -71,13 +80,13 @@ const Scheduler: React.FC = () => {
               <span className="i-mdi-close"></span>
             </button>
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
+              <div className="sm:flex sm:items-start sm">
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
                     {selectEvents.title}
                   </DialogTitle>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 text-justify">
                       {selectEvents.desc}
                     </p>
                   </div>
@@ -115,18 +124,14 @@ const Scheduler: React.FC = () => {
                   </DialogTitle>
                   <div className="mt-2">
                     <p className="font-bold">Title</p>
-                    <input type="text" name="Title" id="Title" className="my-5 rounded-xl border-gray-300 w-full" />
+                    <input type="text" name="Title" id="Title" onChange={(e) => {setSelectEvents({...selectEvents, title: e.target.value})}} className="my-5 rounded-xl border-gray-300 w-full" />
 
                     <p className="font-bold">Description</p>
-                    <input type="text" name="Description" id="Description" className="my-5 rounded-xl border-gray-300 w-full" />
+                    <input type="text" name="Description" id="Description" onChange={(e) => {setSelectEvents({...selectEvents, desc: e.target.value})}} className="my-5 rounded-xl border-gray-300 w-full" />
 
-                    <p className="font-bold">Time Start</p>
-                    <Datepicker name="dateStart" id="dateStart" className="my-5 rounded-xl border-gray-300 w-full"/>
-
-                    <p className="font-bold">Time End</p>
-                    <Datepicker name="dateEnd" id="dateEnd" className="my-5 rounded-xl border-gray-300 w-full"/>
                   </div>
                 </div>
+                
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
