@@ -8,6 +8,11 @@ const nextConfig = {
             port: '',
             pathname: '/8.x/adventurer/**',
           },
+          {
+            protocol: "https",
+            hostname: "img.ophim.live",
+            pathname: "/uploads/**",
+          }
         ],
       },
       reactStrictMode: false,

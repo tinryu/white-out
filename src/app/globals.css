@@ -132,3 +132,8 @@ button.menuToggle {
 button.menuToggle path {
   fill: var(--background);
 }
+
+/* custom css react big calendar */
+.rbc-event, .rbc-day-slot .rbc-background-event {
+  background: rgb(164 202 254) !important;
+}

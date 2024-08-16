@@ -61,7 +61,7 @@ export const Pagination: FC<PaginationProps> = ({
               className={classnames(
                 "relative inline-flex items-center rounded border px-4 py-2 text-sm font-semibold hover:bg-slate-800 hover:text-gray-50 dark:hover:bg-gray-50 dark:hover:text-slate-800 focus:z-20 focus:outline-offset-0",
                 {
-                  "bg-orange-600 text-white dark:text-slate-800": pageNumber === currentPage - 1,
+                  "bg-orange-600 text-white dark:text-slate-800": pageNumber === currentPage,
                 },
                 { "text-gray-900 dark:text-white": pageNumber !== currentPage - 1 }
               )}

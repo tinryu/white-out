@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,7 @@ import { SlideLeft } from "./components/SlideLeft";
 import { SlideRight } from "./components/SlideRight";
 import Header from "./components/Header";
 import { ThemeModeScript } from "flowbite-react";
+import Loading from "./components/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +30,9 @@ export default function RootLayout({
           <SlideLeft/>
           <div className="flex-1 min-h-full lg:w-2/3 md:w-full max-sm:w-[100%] max-sm:pl-[70px]">
             <Header/>
-            <main className="w-full max-h-[85vh] overflow-auto p-4">{children}</main>
+            <Suspense fallback={<Loading/>}>
+              <main className="w-full max-h-[85vh] overflow-auto p-4">{children}</main>
+            </Suspense>
           </div>
           <SlideRight/>
         </div>

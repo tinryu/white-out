@@ -173,6 +173,22 @@ export const SlideLeft = () => {
         },
       ],
     },
+    {
+      group: "film",
+      lib: "",
+      badges: "",
+      color: "",
+      src: "",
+      child: [
+        {
+          name: "film",
+          lib: "i-mdi-movie-open-minus",
+          badges: "",
+          color: "text-yellow-400",
+          src: "/film",
+        },
+      ]
+    },
   ];
 
   const [openMenuId, setOpenMenuId] = useState(null);
