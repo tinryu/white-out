@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useAnimate} from "framer-motion";
 import Link from "next/link";
 
 export const SlideLeft = () => {
+  const $color = 'text-gray-400';
   const menuLists = [
     {
       group: "dashboard",
@@ -16,7 +17,7 @@ export const SlideLeft = () => {
           name: "dashboard",
           lib: "i-mdi-home-outline",
           badges: "",
-          color: "text-red-500",
+          color: $color,
           src: "/dashboards",
         },
       ],
@@ -32,7 +33,7 @@ export const SlideLeft = () => {
           name: "project",
           lib: "i-bx-box",
           badges: "",
-          color: "text-green-500",
+          color: $color,
           src: "/projects",
         },
       ],
@@ -48,7 +49,7 @@ export const SlideLeft = () => {
           name: "account",
           lib: "i-mdi-account",
           badges: "",
-          color: "text-blue-500",
+          color: $color,
           src: "/account",
         },
       ],
@@ -64,56 +65,56 @@ export const SlideLeft = () => {
           name: "account info",
           lib: "i-mdi-info",
           badges: "",
-          color: "text-blue-300",
+          color: $color,
           src: "/authentication/accountinfo",
         },
         {
           name: "bill detail",
           lib: "i-mdi-document",
           badges: "",
-          color: "text-green-500",
+          color: $color,
           src: "/authentication/billdetail",
         },
         {
           name: "account type",
           lib: "i-mdi-account",
           badges: "",
-          color: "text-gray-400",
+          color: $color,
           src: "/authentication/chooseaccounttype",
         },
         {
           name: "forgot",
           lib: "i-mdi-lock",
           badges: "",
-          color: "text-yellow-400",
+          color: $color,
           src: "/authentication/forgot",
         },
         {
           name: "create new password",
           lib: "i-mdi-lock",
           badges: "",
-          color: "text-green-400",
+          color: $color,
           src: "/authentication/setupnewpass",
         },
         {
           name: "sign in",
           lib: "i-mdi-lock",
           badges: "",
-          color: "text-blue-400",
+          color: $color,
           src: "/authentication/signin",
         },
         {
           name: "sign up",
           lib: "i-mdi-lock",
           badges: "",
-          color: "text-red-400",
+          color: $color,
           src: "/authentication/signup",
         },
         {
           name: "verification two step",
           lib: "i-mdi-check",
           badges: "",
-          color: "text-yellow-600",
+          color: $color,
           src: "/authentication/verificationtwostep",
         },
       ],
@@ -129,7 +130,7 @@ export const SlideLeft = () => {
           name: "chat",
           lib: "i-mdi-chat",
           badges: "",
-          color: "text-violet-500",
+          color: $color,
           src: "/chat",
         },
       ],
@@ -145,7 +146,7 @@ export const SlideLeft = () => {
           name: "contact",
           lib: "i-mdi-contact",
           badges: "",
-          color: "text-orange-500",
+          color: $color,
           src: "/contact",
         },
       ],
@@ -161,14 +162,14 @@ export const SlideLeft = () => {
           name: "setting",
           lib: "i-lucide-settings",
           badges: "",
-          color: "text-yellow-400",
+          color: $color,
           src: "/dashboards/settings",
         },
         {
           name: "logout",
           lib: "i-mdi-lock-open",
           badges: "",
-          color: "text-red-300",
+          color: $color,
           src: "#",
         },
       ],
@@ -184,7 +185,7 @@ export const SlideLeft = () => {
           name: "film",
           lib: "i-mdi-movie-open-minus",
           badges: "",
-          color: "text-yellow-400",
+          color: $color,
           src: "/film",
         },
       ]
@@ -248,7 +249,7 @@ export const SlideLeft = () => {
         <div className="py-3 flex items-center max-sm:justify-start relative ml-[15px]">
           <Link href="" className="flex">
             <svg
-              className="w-10 h-10 text-red-400 logo"
+              className="w-10 h-10 text-gray-500 logo"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -258,7 +259,7 @@ export const SlideLeft = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="max-sm:hidden txt_menu self-center text-xl font-semibold max-sm:text-base whitespace-nowrap dark:text-white">
+            <span className="max-sm:hidden txt_menu self-center text-xl max-sm:text-base whitespace-nowrap dark:text-white">
               Brandname
             </span>
             <button className="absolute md:hidden max-sm:block top-14 -right-12 bg-slate-200 rounded-r-xl" onClick={ToggleButton}>
@@ -267,7 +268,7 @@ export const SlideLeft = () => {
           </Link>
         </div>
         <div className="px-3 pb-4 overflow-y-auto max-h-[80vh] bg-white dark:bg-gray-800">
-          <nav className="space-y-2 font-medium">
+          <nav className="space-y-2">
             <ul>
             {menuLists.map((menu, i) => (
               <li key={i} className="my-px">
@@ -276,14 +277,14 @@ export const SlideLeft = () => {
                     <Link
                       key={index}
                       href={item.src ? item.src : ""}
-                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
                     >
                       <span
-                        className={`${item.lib} flex items-center max-sm:justify-center text-base  w-7 h-7 ${item.color}`}
+                        className={`${item.lib} flex items-center max-sm:justify-center text-base  w-7 h-7`}
                       ></span>
                       <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{item.name}</span>
                       {item.badges !== "" ? (
-                        <span className="flex items-center max-sm:justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                        <span className="flex items-center max-sm:justify-center text-xs text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
                           {item.badges}
                         </span>
                       ) : (
@@ -298,9 +299,9 @@ export const SlideLeft = () => {
                     <Link
                       onClick={() => toggleSubMenu(i)}
                       href={menu.src ? menu.src : ""}
-                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
                     >
-                      <span className={`${menu.lib} ${(isSubToggle && (openMenuId && openMenuId === i)) ? 'rotate-0' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base  w-7 h-7 ${menu.color}`}></span>
+                      <span className={`${menu.lib} ${(isSubToggle && (openMenuId && openMenuId === i)) ? 'rotate-0' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base text-gray-500 tw-7 h-7`}></span>
                       <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{menu.group}</span>
                     </Link>
                     <AnimatePresence>
@@ -316,17 +317,17 @@ export const SlideLeft = () => {
                           <li className="my-px" key={index}>
                             <Link
                               href={item.src ? item.src : ""}
-                              className="flex items-center max-sm:justify-center p-2 font-normal text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                              className="flex items-center max-sm:justify-center p-2 text-sm text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
                             >
                               <span
-                                className={`${item.lib} flex items-center max-sm:justify-center text-sm  w-6 h-6 ${item.color}`}
+                                className={`${item.lib} flex items-center max-sm:justify-center text-sm  w-6 h-6`}
                               ></span>
                               <span
                                 className="ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
                                 {item.name}
                               </span>
                               {item.badges !== "" ? (
-                                <span className="flex items-center max-sm:justify-center text-sm text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+                                <span className="flex items-center max-sm:justify-center text-sm text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
                                   {item.badges}
                                 </span>
                               ) : ""}
@@ -347,7 +348,7 @@ export const SlideLeft = () => {
       </aside>
       <p className="text-xs text-gray-600 text-center absolute bottom-0 left-4">
         <Link href={{ pathname: '/contact', query: { slug: 'by-tin-truong' }, }} className="max-sm:block hidden text-[10px]">
-          <span className="i-mdi-alpha-i-circle text-3xl text-green-400"></span>
+          <span className="i-mdi-alpha-i-circle text-3xl text-gray-500"></span>
         </Link>
         <span className="max-sm:hidden">© Brandname 2024. All rights reserved. <a href="#">by Tin Truong</a></span>  
       </p>
