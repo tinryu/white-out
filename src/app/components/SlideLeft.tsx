@@ -352,6 +352,7 @@ export const SlideLeft = () => {
         </Link>
         <span className="max-sm:hidden">© Brandname 2024. All rights reserved. <a href="#">by Tin Truong</a></span>  
       </p>
+      
     </div>
   );
 };
