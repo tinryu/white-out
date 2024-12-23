@@ -7,6 +7,9 @@ import { SlideRight } from "./components/SlideRight";
 import Header from "./components/Header";
 import { ThemeModeScript } from "flowbite-react";
 import Loading from "./components/Loading";
+// import CanvasCursor from "./components/MouseCursor/CanvasCursor";
+// import GradientCursor from "./components/MouseCursor/GradientCursor";
+import TextFlagCursor from "./components/MouseCursor/textflag-cursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +29,7 @@ export default function RootLayout({
         <ThemeModeScript />
       </head>
       <body className={inter.className}>
+        <TextFlagCursor text="❤" color="rgb(196 181 253)" textSize={22} gap={0}/>
         <div className="flex flex-row min-h-screen bg-white dark:bg-gray-800 text-gray-800">
           <SlideLeft/>
           <div className="flex-1 min-h-full lg:w-2/3 md:w-full max-sm:w-[100%] max-sm:pl-[70px]">

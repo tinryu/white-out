@@ -1,5 +1,4 @@
-import TopNav from "../components/TopNav";
-
+import TopNav from '../components/TopNav';
 const menu = [
   {title: 'Overview', link: '/dashboards'},
   {title: 'Targets', link: '/dashboards/targets'},

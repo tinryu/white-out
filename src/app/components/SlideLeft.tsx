@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useAnimate} from "framer-motion";
+import { motion, AnimatePresence, useAnimate } from "framer-motion";
 import Link from "next/link";
 
 export const SlideLeft = () => {
-  const $color = 'text-gray-400';
+  const $color = "text-gray-400";
   const menuLists = [
     {
       group: "dashboard",
@@ -188,63 +188,82 @@ export const SlideLeft = () => {
           color: $color,
           src: "/film",
         },
-      ]
+      ],
     },
   ];
 
   const [openMenuId, setOpenMenuId] = useState(null);
   const [isToggleLeft, setToggleLeft] = useState(false);
-  const [isSubToggle, setSubToggle] = useState(true);
+  const [isSubToggle, setSubToggle] = useState(false);
 
-  const toggleSubMenu = (id :any) => {
-      if (window.innerWidth <= 680) {
-        if(isToggleLeft) {
-          setOpenMenuId((prevState) => (prevState === id ? null: id));
-          setSubToggle(!isSubToggle)        
-        }
-      } else {
-        setOpenMenuId((prevState) => (prevState === id ? null: id));
-        setSubToggle(!isSubToggle)
-      }
+  const toggleSubMenu = (id: any) => {
+    setOpenMenuId((prevState) => (prevState !== id ? id : null));
+    console.log(openMenuId);
+    setSubToggle(true);
+    console.log(isSubToggle);
   };
-  const ToggleButton = () => {
+  const toggleButton = () => {
     setToggleLeft(!isToggleLeft);
     setSubToggle(!isSubToggle);
   };
+
   const scope = useMenuAnimation(isToggleLeft);
 
   // animate slide
   function useMenuAnimation(isToggleLeft: boolean) {
     const [scope, animate] = useAnimate();
     useEffect(() => {
-      const menuAnimations: any[] = isToggleLeft
-        ? [
-            [ 
-              "span.txt_menu", 
-              { transform: "scale(1)", opacity: 1, filter: "blur(0px)", display: "block" },
-              { ease: [0.08, 0.65, 0.53, 0.96], duration: 0.4 }
+      const handleResize = () => {
+        const isSmallScreen = window.innerWidth <= 768;
+        if (!isSmallScreen && !isToggleLeft) {
+          setToggleLeft(true); // Reset isToggleLeft when switching to large screen
+          setSubToggle(false);
+        }
+        const menuAnimations: any[] = isToggleLeft
+          ? [
+              [
+                "span.txt_menu",
+                {
+                  transform: "scale(1)",
+                  opacity: 1,
+                  filter: "blur(0px)",
+                  display: "block",
+                },
+                { ease: [0.08, 0.65, 0.53, 0.96], duration: 0.4 },
+              ],
             ]
-          ]
-        : [
-            [ 
-              "span.txt_menu", 
-              { transform: "scale(0.5)", opacity: 0, filter: "blur(10px)", display: "none" },
-            ]
-          ];
+          : [
+              [
+                "span.txt_menu",
+                {
+                  transform: "scale(0.5)",
+                  opacity: 0,
+                  filter: "blur(10px)",
+                  display: "none",
+                },
+              ],
+            ];
 
-      if (window.innerWidth <= 680) {
-        animate([
-          ...menuAnimations,
-        ]);
-      }   
-      
+          animate([...menuAnimations]);
+      };
+      // Trigger the resize handler on load and on resize
+      handleResize();
+      window.addEventListener("resize", handleResize);
+
+      // Cleanup listener on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }, [animate, isToggleLeft]);
-  
+
     return scope;
   }
 
   return (
-    <div className="relative max-sm:absolute top-0 left-0 z-10 min-h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700" ref={scope}>
+    <div
+      className="relative max-sm:absolute top-0 left-0 z-10 min-h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+      ref={scope}
+    >
       <aside className="left_slide lg:w-64 md:w-48 relative">
         <div className="py-3 flex items-center max-sm:justify-start relative ml-[15px]">
           <Link href="" className="flex">
@@ -262,97 +281,131 @@ export const SlideLeft = () => {
             <span className="max-sm:hidden txt_menu self-center text-xl max-sm:text-base whitespace-nowrap dark:text-white">
               Brandname
             </span>
-            <button className="absolute md:hidden max-sm:block top-14 -right-12 bg-slate-200 rounded-r-xl" onClick={ToggleButton}>
-              <span className={`${isToggleLeft ? 'rotate-180' : 'rotate-0'} ease-linear duration-500 i-mdi-chevron-right-circle text-4xl text-black flex items-center my-1 mr-2 ml-1`}></span>
+            <button
+              className="absolute md:hidden max-sm:block top-14 -right-12 bg-slate-200 rounded-r-xl"
+              onClick={toggleButton}
+            >
+              <span
+                className={`${
+                  isToggleLeft ? "rotate-180" : "rotate-0"
+                } ease-linear duration-500 i-mdi-chevron-right-circle text-4xl text-black flex items-center my-1 mr-2 ml-1`}
+              ></span>
             </button>
           </Link>
         </div>
         <div className="px-3 pb-4 overflow-y-auto max-h-[80vh] bg-white dark:bg-gray-800">
           <nav className="space-y-2">
             <ul>
-            {menuLists.map((menu, i) => (
-              <li key={i} className="my-px">
-                {menu.child.length === 1 &&
-                  menu.child.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.src ? item.src : ""}
-                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
-                    >
-                      <span
-                        className={`${item.lib} flex items-center max-sm:justify-center text-base  w-7 h-7`}
-                      ></span>
-                      <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{item.name}</span>
-                      {item.badges !== "" ? (
-                        <span className="flex items-center max-sm:justify-center text-xs text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
-                          {item.badges}
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </Link>
-                  ))
-                }
-                
-                {menu.child.length > 1 ?
-                  <>
-                    <Link
-                      onClick={() => toggleSubMenu(i)}
-                      href={menu.src ? menu.src : ""}
-                      className="flex items-center max-sm:justify-center p-2 text-base text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
-                    >
-                      <span className={`${menu.lib} ${(isSubToggle && (openMenuId && openMenuId === i)) ? 'rotate-0' : '-rotate-90'} ease-linear duration-300 flex items-center justify-center text-base text-gray-500 tw-7 h-7`}></span>
-                      <span className="max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">{menu.group}</span>
-                    </Link>
-                    <AnimatePresence>
-                      {openMenuId === i && (
-                        <motion.ul
-                        initial={{ height: 0, opacity: 0, filter: "blur(10px)"}}
-                        animate={{ height: 'auto', opacity: 1, filter: "blur(0px)"}}
-                        exit={{ height: 0, opacity: 0, filter: "blur(10px)"}}
-                        transition={{ duration: 0.3 }}
-                        className="md:pl-5"
+              {menuLists.map((menu, i) => (
+                <li key={i} className="my-px">
+                  {menu.child.length === 1 &&
+                    menu.child.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.src ? item.src : ""}
+                        className="flex items-center max-sm:justify-center p-2 text-base text-gray-400 font-semibold rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
                       >
-                        {menu.child.map((item, index) => (
-                          <li className="my-px" key={index}>
-                            <Link
-                              href={item.src ? item.src : ""}
-                              className="flex items-center max-sm:justify-center p-2 text-sm text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
-                            >
-                              <span
-                                className={`${item.lib} flex items-center max-sm:justify-center text-sm  w-6 h-6`}
-                              ></span>
-                              <span
-                                className="ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
-                                {item.name}
-                              </span>
-                              {item.badges !== "" ? (
-                                <span className="flex items-center max-sm:justify-center text-sm text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
-                                  {item.badges}
-                                </span>
-                              ) : ""}
-                            </Link>
-                          </li>
-                        ))}
-                      </motion.ul>
-                      )}
-                    </AnimatePresence>
-                  </> : ""
-                }
-              </li>
-            ))}
+                        <span
+                          className={`${item.lib} ease-linear duration-300 flex items-center max-sm:justify-center text-base w-7 h-7`}
+                        ></span>
+                        <span className="ease-linear duration-300 max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
+                          {item.name}
+                        </span>
+                        {item.badges !== "" ? (
+                          <span className="flex items-center max-sm:justify-center text-xs text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
+                            {item.badges}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </Link>
+                    ))}
+
+                  {menu.child.length > 1 ? (
+                    <>
+                      <Link
+                        onClick={() => toggleSubMenu(i)}
+                        href={menu.src ? menu.src : ""}
+                        className={`${!isToggleLeft ? 'hidden' : ''} flex items-center max-sm:justify-center p-2 text-base text-gray-400 font-semibold rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group`}
+                      >
+                        <span
+                          className={`${menu.lib} ${
+                            isSubToggle && openMenuId && openMenuId === i
+                              ? "rotate-0"
+                              : "-rotate-90"
+                          } ease-linear duration-300 flex items-center justify-center text-base w-7 h-7`}
+                        ></span>
+                        <span className="ease-linear duration-300 max-sm:hidden ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
+                          {menu.group}
+                        </span>
+                      </Link>
+                      <AnimatePresence>
+                        {isSubToggle && openMenuId && openMenuId === i && (
+                          <motion.ul
+                            initial={{
+                              height: 0,
+                              opacity: 0,
+                              filter: "blur(10px)",
+                            }}
+                            animate={{
+                              height: "auto",
+                              opacity: 1,
+                              filter: "blur(0px)",
+                            }}
+                            exit={{
+                              height: 0,
+                              opacity: 0,
+                              filter: "blur(10px)",
+                            }}
+                            transition={{ duration: 0.3 }}
+                            className="md:pl-1"
+                          >
+                            {menu.child.map((item, index) => (
+                              <li className="my-px" key={index}>
+                                <Link
+                                  href={item.src ? item.src : ""}
+                                  className="flex items-center max-sm:justify-center p-2 text-sm text-gray-400 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                                >
+                                  <span
+                                    className={`${item.lib} flex items-center max-sm:justify-center text-sm  w-6 h-6`}
+                                  ></span>
+                                  <span className="ms-3 capitalize txt_menu max-sm:w-20 overflow-hidden text-ellipsis">
+                                    {item.name}
+                                  </span>
+                                  {item.badges !== "" ? (
+                                    <span className="flex items-center max-sm:justify-center text-sm text-gray-400 bg-red-100 h-6 px-2 rounded-full ml-auto">
+                                      {item.badges}
+                                    </span>
+                                  ) : (
+                                    ""
+                                  )}
+                                </Link>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
-        
       </aside>
       <p className="text-xs text-gray-600 text-center absolute bottom-0 left-4">
-        <Link href={{ pathname: '/contact', query: { slug: 'by-tin-truong' }, }} className="max-sm:block hidden text-[10px]">
+        <Link
+          href={{ pathname: "/contact", query: { slug: "by-tin-truong" } }}
+          className="max-sm:block hidden text-[10px]"
+        >
           <span className="i-mdi-alpha-i-circle text-3xl text-gray-500"></span>
         </Link>
-        <span className="max-sm:hidden">© Brandname 2024. All rights reserved. <a href="#">by Tin Truong</a></span>  
+        <span className="max-sm:hidden">
+          © Brandname 2024. All rights reserved. <a href="#">by Tin Truong</a>
+        </span>
       </p>
-      
     </div>
   );
 };

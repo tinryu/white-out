@@ -5,11 +5,20 @@ import Image from "next/image";
 import { MenuToggle } from "./MenuToggle";
 
 export const SlideRight = () => {
-  function useMenuAnimation(isOpen: boolean) {
+  const [isToggle, setToggle] = useState(false);
+  const scope = useMenuAnimation(isToggle);
+
+  function useMenuAnimation(isToggle: boolean) {
     const [scope, animate] = useAnimate();
 
     useEffect(() => {
-      const menuAnimations: any[] = isOpen
+      const handleResize = () => {
+        const isSmallScreen = window.innerWidth <= 768;
+        if(!isSmallScreen && !isToggle) {
+          setToggle(!isToggle);
+        }
+
+        const menuAnimations: any[] = isToggle
         ? [
             [
               "aside",
@@ -44,39 +53,47 @@ export const SlideRight = () => {
               { at: "-0.1" },
             ],
           ];
-      if (window.innerWidth <= 1024) {
+
         animate([
           [
             "path.top",
-            { d: isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5" },
+            { d: isToggle ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5" },
             { at: "<" },
           ],
-          ["path.middle", { opacity: isOpen ? 0 : 1 }, { at: "<" }],
+          ["path.middle", { opacity: isToggle ? 0 : 1 }, { at: "<" }],
           [
             "path.bottom",
-            { d: isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346" },
+            { d: isToggle ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346" },
             { at: "<" },
           ],
           ...menuAnimations,
         ]);
       }
-    }, [isOpen, animate]);
+      // Trigger the resize handler on load and on resize
+      handleResize();
+      window.addEventListener("resize", handleResize);
+
+      // Cleanup listener on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, [isToggle, animate]);
 
     return scope;
   }
 
-  const [isToggle, setToggle] = useState(false);
-  const scope = useMenuAnimation(isToggle);
-
+  const handleToogle = () => {
+    setToggle(!isToggle);
+  }
   return (
     <div
       className="relative max-md:absolute top-0 right-0 z-10 min-h-full bg-white border-l border-gray-200 dark:bg-gray-800 dark:border-gray-700"
       ref={scope}
     >
       {/* toggle button */}
-      <MenuToggle toggle={() => setToggle(!isToggle)} />
+      <MenuToggle toggle={handleToogle} />
       {/* toggle div */}
-      <aside className="w-64 max-sm:w-full max-sm:hidden md:hidden lg:block md:h-screen">
+      <aside className="ease-linear duration-500 w-64 max-sm:w-full max-sm:hidden md:hidden lg:block md:h-screen">
         <div className="flex items-center justify-start p-4 mb-2">
           <h3 className="inline-flex">Notifications</h3>
         </div>
